@@ -1,0 +1,22 @@
+.c-movies {
+  padding: 20px 0;
+  margin: 0 auto 20px auto;
+  max-width: 90%;
+}
+
+.c-movies__header {
+  margin-bottom: 20px;
+}
+
+.c-movies__title {
+  color: white;
+  margin: 0;
+  font-Size: 27px;
+}
+
+.c-movies__list {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+}
