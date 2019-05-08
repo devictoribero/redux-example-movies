@@ -4,21 +4,18 @@ import {
 } from '../actions'
 
 export function movies(state = {
-  isFetching: false,
-  didInvalidate: false,
+  isFetching: true,
   movies: []
 }, action) {
   switch(action.type) {
     case FETCH_MOVIES_REQUEST:
       return {
-        didInvalidate: false,
         isFetching: true,
         movies: []
       }
 
     case FETCH_MOVIES_REQUEST_SUCCESS:
       return {
-        didInvalidate: false,
         isFetching: false,
         movies: action.payload.movies
       }

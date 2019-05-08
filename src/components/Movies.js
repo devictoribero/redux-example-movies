@@ -33,3 +33,12 @@ MoviesList.propTypes = {
     })
   ).isRequired
 }
+
+export function MoviesListSkeleton() {
+  const arr = [0,1,2,3,4,5,6]
+  return (
+    <div className='c-movies__list c-movies__list--skeleton'>
+      {arr.map(el => <div key={el}></div>)}
+    </div>
+  )
+}

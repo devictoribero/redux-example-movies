@@ -2,16 +2,23 @@ import React from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {fetchMovies} from '../actions'
-import {MoviesLayout, MoviesList} from '../components/Movies'
+import {MoviesLayout, MoviesList, MoviesListSkeleton} from '../components/Movies'
 
 function MyComponent({title, category, movies, isFetching, loadMovies}) {
   React.useEffect(() => {
     loadMovies(category)
   }, [category, loadMovies])
 
-  if (!movies || movies.length === 0) {
-    return null;
+  if (isFetching) {
+    return(
+      <MoviesLayout title={title ? title : category}>
+        <MoviesListSkeleton/>
+      </MoviesLayout>
+    )
   }
+
+  const noMoviesAfterFetch = (!movies || movies.length === 0) && isFetching
+  if (noMoviesAfterFetch) return null;
 
   return (
     <MoviesLayout title={title ? title : category}>

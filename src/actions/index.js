@@ -17,6 +17,13 @@ function requestMoviesSuccess(movies) {
   }
 }
 
+function requestMoviesError(error) {
+  return {
+    type: FETCH_MOVIES_REQUEST_SUCCESS,
+    error
+  }
+}
+
 export function fetchMovies({category}) {
   return function(dispatch) {
     dispatch(requestMovies({category}))
@@ -26,5 +33,6 @@ export function fetchMovies({category}) {
     return request
       .then(resp => resp.json())
       .then(resp => dispatch(requestMoviesSuccess(resp.results)))
+      .catch(err => dispatch(dispatch(requestMoviesError(err))))
   }
 }
