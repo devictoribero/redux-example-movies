@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import {fetchMovies} from '../actions'
 import {MoviesLayout, MoviesList, MoviesListSkeleton} from '../components/Movies'
 
-function MyComponent({title, category, movies, isFetching, loadMovies}) {
+function MyComponent({title, category, movies, max, isFetching, loadMovies}) {
   React.useEffect(() => {
     loadMovies(category)
   }, [category, loadMovies])
@@ -22,7 +22,7 @@ function MyComponent({title, category, movies, isFetching, loadMovies}) {
 
   return (
     <MoviesLayout title={title ? title : category}>
-      <MoviesList movies={movies}/>
+      <MoviesList max={max} movies={movies}/>
     </MoviesLayout>
   )
 }
@@ -31,7 +31,8 @@ MyComponent.propTypes = {
   category: PropTypes.string.isRequired,
   movies: PropTypes.array,
   isFetching: PropTypes.bool,
-  loadMovies: PropTypes.func.isRequired
+  loadMovies: PropTypes.func.isRequired,
+  max: PropTypes.number
 }
 
 const mapStateToProps = state => {

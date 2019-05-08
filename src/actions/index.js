@@ -4,20 +4,20 @@ export const FETCH_MOVIES_REQUEST = 'FETCH_MOVIES_REQUEST'
 export const FETCH_MOVIES_REQUEST_ERROR = 'FETCH_MOVIES_REQUEST_ERROR'
 export const FETCH_MOVIES_REQUEST_SUCCESS = 'FETCH_MOVIES_REQUEST_SUCCESS'
 
-function requestMovies() {
+export function requestMovies() {
   return {
     type: FETCH_MOVIES_REQUEST,
   }
 }
 
-function requestMoviesSuccess(movies) {
+export function requestMoviesSuccess(movies) {
   return {
     type: FETCH_MOVIES_REQUEST_SUCCESS,
     payload: {movies}
   }
 }
 
-function requestMoviesError(error) {
+export function requestMoviesError(error) {
   return {
     type: FETCH_MOVIES_REQUEST_SUCCESS,
     error

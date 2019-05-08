@@ -1,12 +1,17 @@
+      
 import {
   FETCH_MOVIES_REQUEST,
-  FETCH_MOVIES_REQUEST_SUCCESS
+  FETCH_MOVIES_REQUEST_SUCCESS,
+  FETCH_MOVIES_REQUEST_ERROR
 } from '../actions'
 
 export function movies(state = {
-  isFetching: true,
+  isFetching: false,
   movies: []
 }, action) {
+
+  if(!action) return state;
+
   switch(action.type) {
     case FETCH_MOVIES_REQUEST:
       return {
@@ -18,6 +23,13 @@ export function movies(state = {
       return {
         isFetching: false,
         movies: action.payload.movies
+      }
+
+    case FETCH_MOVIES_REQUEST_ERROR:
+      return {
+        isFetching: false,
+        error: action.error,
+        movies: []
       }
 
     default:

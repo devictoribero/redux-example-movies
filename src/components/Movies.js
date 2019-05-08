@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import './Movies.css'
 import {MoviePreview} from './MoviePreview'
+import {shuffle} from '../utils/shuffle'
 
 export function MoviesLayout({title, children}) {
   return(
@@ -19,10 +20,12 @@ MoviesLayout.propTypes = {
 }
 
 
-export function MoviesList({movies = []}) {
+export function MoviesList({movies = [], max = movies.length}) {
+  const moviesToShow = shuffle(movies).slice(0,max)
+  
   return (
     <ul className='c-movies__list'>
-      {movies.map(movie => <MoviePreview key={movie.id} {...movie}/>)}
+      {moviesToShow.map(movie => <MoviePreview key={movie.id} {...movie}/>)}
     </ul>
   )
 }
