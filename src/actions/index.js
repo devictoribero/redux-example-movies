@@ -1,25 +1,26 @@
 import {API_BASE_PATH, API_KEY} from '../config'
 
 export const FETCH_MOVIES_REQUEST = 'FETCH_MOVIES_REQUEST'
-export const FETCH_MOVIES_REQUEST_ERROR = 'FETCH_MOVIES_REQUEST_ERROR'
 export const FETCH_MOVIES_REQUEST_SUCCESS = 'FETCH_MOVIES_REQUEST_SUCCESS'
+export const FETCH_MOVIES_REQUEST_FAILURE = 'FETCH_MOVIES_REQUEST_FAILURE'
 
-export function requestMovies() {
+function requestMovies() {
   return {
     type: FETCH_MOVIES_REQUEST,
   }
 }
 
-export function requestMoviesSuccess(movies) {
+function requestMoviesSuccess(movies) {
   return {
     type: FETCH_MOVIES_REQUEST_SUCCESS,
     payload: {movies}
   }
 }
 
-export function requestMoviesError(error) {
+function requestMoviesError(error) {
   return {
-    type: FETCH_MOVIES_REQUEST_SUCCESS,
+    type: FETCH_MOVIES_REQUEST_FAILURE,
+    payload: {movies:[]},
     error
   }
 }
@@ -31,8 +32,8 @@ export function fetchMovies({category}) {
     const request = fetch(`${API_BASE_PATH}/movie/${category}?api_key=${API_KEY}&language=en-US&page=1/`)
 
     return request
-      .then(resp => resp.json())
-      .then(resp => dispatch(requestMoviesSuccess(resp.results)))
-      .catch(err => dispatch(dispatch(requestMoviesError(err))))
+      .then(response => response.json())
+      .then(response => dispatch(requestMoviesSuccess(response.results)))
+      .catch(err => dispatch(requestMoviesError(err)))
   }
 }
